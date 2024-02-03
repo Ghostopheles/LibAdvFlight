@@ -140,12 +140,12 @@ end
 
 ---@return boolean advFlyEnabled
 function LibAdvFlight.IsAdvFlyEnabled()
-    return State.IsAdvFlyEnabled;
+    return State.AdvFlyEnabled;
 end
 
 ---@return boolean isAdvFlying
 function LibAdvFlight.IsAdvFlying()
-    return State.IsAdvFlying;
+    return State.AdvFlying;
 end
 
 ---@return number vigorMax
