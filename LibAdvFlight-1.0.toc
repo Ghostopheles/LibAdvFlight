@@ -10,5 +10,8 @@
 ## X-License: Public Domain
 ## X-Category: Library
 
+## X-Curse-Project-ID: 970047
+## X-Wago-ID: kNMdBjGz
+
 LibStub/LibStub.lua
 LibAdvFlight-1.0.lua
