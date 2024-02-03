@@ -1,0 +1,25 @@
+package-as: LibAdvFlight-1.0
+enable-nolib-creation: no
+
+license-output: LICENSE
+
+externals:
+  LibStub: https://repos.wowace.com/wow/libstub/trunk
+
+ignore:
+  - LibStub/*.rockspec
+  - LibStub/*.toc
+  - LibStub/changelog.*
+  - LibStub/CHANGELOG.*
+  - LibStub/docs
+  - LibStub/examples
+  - LibStub/README.*
+  - LibStub/tests
+  - LibStub/.pkgmeta
+  - .gitignore
+  - CHANGELOG.md
+  - README.md
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
