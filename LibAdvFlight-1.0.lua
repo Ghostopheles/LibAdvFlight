@@ -22,7 +22,7 @@ local Events = {
     ADV_FLYING_STATE_CHANGED = "ADV_FLYING_STATE_CHANGED",                  -- Player's adv flying state has changed
 
     VIGOR_MAX_CHANGED = "VIGOR_MAX_CHANGED",                                -- Player's max vigor has changed - args: new max vigor level
-    VIGOR_CHANGED = "VIGOR_CHANGED",                                         -- Player's vigor has changed - args: new vigor level
+    VIGOR_CHANGED = "VIGOR_CHANGED",                                        -- Player's vigor has changed - args: new vigor level
 };
 LibAdvFlight.Events = Events;
 
