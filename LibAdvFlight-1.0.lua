@@ -11,18 +11,19 @@ if not LibAdvFlight then
 end
 
 --- Event constants - for most cases, contains an 'on' and 'off' event, as well as a toggle event
+--- These can be registered using the API functions below, or by just registering a callback w/ the global EventRegistry
 ---@class LibAdvFlightEvents
 local Events = {
     ADV_FLYING_ENABLED = "ADV_FLYING_ENABLED",                              -- Player is able to adv fly (on mount)
     ADV_FLYING_DISABLED = "ADV_FLYING_DISABLED",                            -- Player is no longer able to adv fly (dismounted, no flying zone)
-    ADV_FLYING_ENABLE_STATE_CHANGED = "ADV_FLYING_ENABLE_STATE_CHANGED",    -- Player's adv flying enable state has changed
+    ADV_FLYING_ENABLE_STATE_CHANGED = "ADV_FLYING_ENABLE_STATE_CHANGED",    -- Player's adv flying enable state has changed - args: isAdvFlyEnabled
 
     ADV_FLYING_START = "ADV_FLYING_START",                                  -- Player has taken off and is flying
     ADV_FLYING_END = "ADV_FLYING_END",                                      -- Player has landed and is no longer flying
-    ADV_FLYING_STATE_CHANGED = "ADV_FLYING_STATE_CHANGED",                  -- Player's adv flying state has changed
-
-    VIGOR_MAX_CHANGED = "VIGOR_MAX_CHANGED",                                -- Player's max vigor has changed - args: new max vigor level
-    VIGOR_CHANGED = "VIGOR_CHANGED",                                        -- Player's vigor has changed - args: new vigor level
+    ADV_FLYING_STATE_CHANGED = "ADV_FLYING_STATE_CHANGED",                  -- Player's adv flying state has changed - args: isAdvFlying
+                                                                            -- NOTE: vigor levels occasionally return garbage data when you first mount up after logging in
+    VIGOR_MAX_CHANGED = "VIGOR_MAX_CHANGED",                                -- Player's max vigor has changed - args: vigorMax
+    VIGOR_CHANGED = "VIGOR_CHANGED",                                        -- Player's vigor has changed - args: vigorCurrent
 };
 LibAdvFlight.Events = Events;
 
