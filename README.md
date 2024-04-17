@@ -13,20 +13,24 @@ local function OnAdvFlyStart()
     print("Player has taken off!");
 end
 
+--- Using the provided API function
 LibAdvFlight.RegisterCallback(Events.ADV_FLYING_START, OnAdvFlyStart);
+
+-- Using the global EventRegistry
+EventRegistry:RegisterCallback(Events.ADV_FLYING_START, OnAdvFlyStart);
 ```
 
 ## API
 
 ### Events
-All event names can be found in `LibAdvFlight.Events`. Event args will be listed beneath any events that include them.
+All events can be found in `LibAdvFlight.Events`. Event args will be listed beneath any events that include them.
 
 ##### Advanced Flying Enable State
-Whether or not the player is *able* to advanced fly.
+Whether or not the player is *able* to advanced fly. i.e. player is mounted on an advanced flying mount.
 - `ADV_FLYING_ENABLED`: Advanced flying has been enabled. This fires when the player mounts up on an advanced flyable mount, or when using Soar as a Dracthyr.
 - `ADV_FLYING_DISABLED`: Advanced flying has been disabled. Occurs when the player dismounts, or if the zone is not advanced flyable.
 - `ADV_FLYING_ENABLE_STATE_CHANGED`: Advanced flying enable state has changed. This acts as a 'toggle', useful if you would rather register one event instead of both `ADV_FLYING_{ENABLED | DISABLED}`.
-    - `advFlyingEnabled` - `boolean`: Indicates the new advanced flying enable state.
+    - `isAdvFlyEnabled` - `boolean`: Indicates the new advanced flying enable state.
 
 ##### Advanced Flying State
 Whether the player is actively using advanced flight or not (flying or grounded, essentially).
@@ -43,7 +47,7 @@ Player's current vigor/energy state
     - `vigorCurrent` - `number`: Player's current vigor value.
 
 ### Functions
-Events are great and all, but useless without a way to listen for them.
+Events are great and all, but useless without a way to listen for them. Here, you can choose to use the API function below, or you can just register a callback with the global EventRegistry if you prefer.
 
 ##### `LibAdvFlight.RegisterCallback(event, callback, owner?)`
 Registers a callback for the given event.
