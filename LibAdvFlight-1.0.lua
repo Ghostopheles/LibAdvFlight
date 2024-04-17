@@ -29,21 +29,8 @@ LibAdvFlight.Events = Events;
 
 --------------
 
-local function GenerateEvents()
-    local tbl = {};
-    for _, v in pairs(LibAdvFlight.Events) do
-        tinsert(tbl, v);
-    end
-
-    return tbl;
-end
-
---------------
-
 -- event registry
-local Registry = CreateFromMixins(CallbackRegistryMixin);
-Registry:OnLoad();
-Registry:GenerateCallbackEvents(GenerateEvents());
+local Registry = EventRegistry;
 
 --------------
 
