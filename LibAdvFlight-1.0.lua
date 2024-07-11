@@ -1,7 +1,7 @@
 assert(LibStub, "LibStub not found.");
 
 ---@alias LibAdvFlight-1.0 LibAdvFlight
-local major, minor = "LibAdvFlight-1.0", 1;
+local major, minor = "LibAdvFlight-1.0", 2;
 
 ---@class LibAdvFlight
 local LibAdvFlight = LibStub:NewLibrary(major, minor);
@@ -58,8 +58,8 @@ function EventFrame:OnUpdate()
     local isGliding, canGlide, forwardSpeed = C_PlayerInfo.GetGlidingInfo();
 
     -- we basically are just going off of the changes in our stored state to trigger events
-    -- because PLAYER_CAN_GLIDE_CHANGED is unreliable and
-    -- there's no event for actually taking off and flying
+    -- because the relevant events (PLAYER_CAN_GLIDE_CHANGED and PLAYER_IS_GLIDING_CHANGED)
+    -- are unreliable
 
     -- all of these are just
     --  check stored state vs new state
@@ -126,11 +126,27 @@ end
 --------------
 -- public state accessors
 
+local SWITCH_FLIGHT_STYLE_SPELL = 436854;
+
+---Returns true if the player has unlocked Skyriding
+---@return boolean advFlyUnlocked
+function LibAdvFlight.IsAdvFlightUnlocked()
+    return C_MountJournal.IsDragonridingUnlocked();
+end
+
+--- Returns true if the player has unlocked the ability to switch flight styles
+---@return boolean canSwitchFlightStyles
+function LibAdvFlight.CanSwitchFlightStyles()
+    return IsPlayerSpell(SWITCH_FLIGHT_STYLE_SPELL);
+end
+
+---Returns true if the player is on a Skyriding mount and can Skyride
 ---@return boolean advFlyEnabled
 function LibAdvFlight.IsAdvFlyEnabled()
     return State.AdvFlyEnabled;
 end
 
+---Returns true if the player is currently Skyriding
 ---@return boolean isAdvFlying
 function LibAdvFlight.IsAdvFlying()
     return State.AdvFlying;
@@ -153,20 +169,25 @@ end
 
 ---@return number forwardSpeedRounded
 function LibAdvFlight.GetForwardSpeedRounded()
-    return floor(State.ForwardSpeed+0.5);
+    return Round(State.ForwardSpeed);
 end
 
----@return number? heading
+---Returns current player heading (direction) in degrees
+---@return number? heading nil in instances
 function LibAdvFlight.GetHeading()
     return State.Heading or nil;
 end
 
----@return number? headingRounded
-function LibAdvFlight.GetHeadingRounded()
-    return State.Heading and floor(State.Heading+0.5) or nil;
+---Returns current player heading (direction) in degrees, rounded. 
+---@param numDigits number Number of significant digits to round to. If ommitted, will round to the nearest whole number.
+---@return number? headingRounded nil in instances
+function LibAdvFlight.GetHeadingRounded(numDigits)
+    numDigits = numDigits or 0;
+    return State.Heading and RoundToSignificantDigits(State.Heading, numDigits) or nil;
 end
 
----@return number? headingRadians
+---Returns current heading (direction) in radians
+---@return number? headingRadians nil in instances
 function LibAdvFlight.GetHeadingRadians()
     return State.Heading and State.Heading * (math.pi / 180) or nil;
 end
