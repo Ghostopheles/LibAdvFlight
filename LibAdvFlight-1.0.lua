@@ -13,7 +13,7 @@ end
 --- These can be registered using the API functions below, or by just registering a callback w/ the global EventRegistry
 ---@class LibAdvFlightEvents
 local Events = {
-    ADV_FLYING_ENABLED = "ADV_FLYING_ENABLED",                              -- Player is able to adv fly (on mount)
+    ADV_FLYING_ENABLED = "ADV_FLYING_ENABLED",                              -- Player is able to adv fly (has mounted up)
     ADV_FLYING_DISABLED = "ADV_FLYING_DISABLED",                            -- Player is no longer able to adv fly (dismounted, no flying zone)
     ADV_FLYING_ENABLE_STATE_CHANGED = "ADV_FLYING_ENABLE_STATE_CHANGED",    -- Player's adv flying enable state has changed - args: isAdvFlyEnabled
 
