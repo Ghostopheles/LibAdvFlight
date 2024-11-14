@@ -26,6 +26,17 @@ local Events = {
 };
 LibAdvFlight.Events = Events;
 
+
+-- Some enum values for standardization
+---@enum LibAdvFlightOptionalSpell
+local OPTIONAL_SPELLS = {
+    SwitchFlightStyle = 436854,
+    LightningRush = 447982,
+    RideAlong = 447959
+};
+
+LibAdvFlight.OptionalSpells = OPTIONAL_SPELLS;
+
 --------------
 
 -- event registry
@@ -56,7 +67,7 @@ end
 function EventFrame:OnUpdate()
     local isGliding, canGlide, forwardSpeed = C_PlayerInfo.GetGlidingInfo();
 
-    -- we basically are just going off of the changes in our stored state to trigger events
+    -- we are just going off of the changes in our stored state to trigger events
     -- because the relevant events (PLAYER_CAN_GLIDE_CHANGED and PLAYER_IS_GLIDING_CHANGED)
     -- are unreliable
 
@@ -125,8 +136,6 @@ end
 --------------
 -- public state accessors
 
-local SWITCH_FLIGHT_STYLE_SPELL = 436854;
-
 ---Returns true if the player has unlocked Skyriding
 ---@return boolean advFlyUnlocked
 function LibAdvFlight.IsAdvFlightUnlocked()
@@ -136,7 +145,37 @@ end
 --- Returns true if the player has unlocked the ability to switch flight styles
 ---@return boolean canSwitchFlightStyles
 function LibAdvFlight.CanSwitchFlightStyles()
-    return IsPlayerSpell(SWITCH_FLIGHT_STYLE_SPELL);
+    return LibAdvFlight.HasTalentChoice(OPTIONAL_SPELLS.SwitchFlightStyle);
+end
+
+--- Returns true if the player has chosen the lightning rush talent in the Skyriding skill tree
+---@return boolean canSwitchFlightStyles
+function LibAdvFlight.HasLightningRush()
+    return LibAdvFlight.HasTalentChoice(OPTIONAL_SPELLS.LightningRush);
+end
+
+--- Returns true if the player has enabled the ability to carry friends with ride along
+---@return boolean canSwitchFlightStyles
+function LibAdvFlight.HasRideAlongEnabled()
+    return LibAdvFlight.HasTalentChoice(OPTIONAL_SPELLS.RideAlong);
+end
+
+---@param choice LibAdvFlightOptionalSpell
+---@return boolean hasTalent
+function LibAdvFlight.HasTalentChoice(choice)
+    return IsPlayerSpell(choice)
+end
+
+local LIGHTNING_RUSH_AURA_SPELLID = 418590;
+
+---@return number charges Number of lightning rush charges
+function LibAdvFlight.GetLightningRushCharges()
+    local auraData = C_UnitAuras.GetPlayerAuraBySpellID(LIGHTNING_RUSH_AURA_SPELLID);
+    if not auraData then
+        return 0;
+    end
+
+    return auraData.applications;
 end
 
 ---Returns true if the player is on a Skyriding mount and can Skyride
