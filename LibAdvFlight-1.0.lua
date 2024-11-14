@@ -1,6 +1,6 @@
 assert(LibStub, "LibStub not found.");
 
-local major, minor = "LibAdvFlight-1.0", 2;
+local major, minor = "LibAdvFlight-1.0", 3;
 
 ---@class LibAdvFlight-1.0
 local LibAdvFlight = LibStub:NewLibrary(major, minor);
