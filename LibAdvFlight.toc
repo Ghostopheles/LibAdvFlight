@@ -14,4 +14,4 @@
 ## X-Wago-ID: kNMdBjGz
 
 LibStub/LibStub.lua
-LibAdvFlight-1.0.lua
+lib.xml
