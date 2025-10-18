@@ -1,4 +1,4 @@
-package-as: LibAdvFlight-1.0
+package-as: LibAdvFlight
 enable-nolib-creation: no
 
 license-output: LICENSE
