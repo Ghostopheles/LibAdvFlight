@@ -15,9 +15,6 @@ end
 
 --- Using the provided API function
 LibAdvFlight.RegisterCallback(Events.ADV_FLYING_START, OnAdvFlyStart);
-
--- Using the global EventRegistry
-EventRegistry:RegisterCallback(Events.ADV_FLYING_START, OnAdvFlyStart);
 ```
 
 ## API
