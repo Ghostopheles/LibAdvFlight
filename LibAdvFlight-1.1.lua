@@ -45,7 +45,9 @@ LibAdvFlight.SkyridingSpells = SKYRIDING_SPELLS;
 --------------
 
 -- event registry
-local Registry = EventRegistry;
+local Registry = CreateFromMixins(CallbackRegistryMixin);
+Registry:OnLoad();
+Registry:GenerateCallbackEvents(GetKeysArray(Events));
 
 --------------
 

@@ -40,7 +40,9 @@ LibAdvFlight.OptionalSpells = OPTIONAL_SPELLS;
 --------------
 
 -- event registry
-local Registry = EventRegistry;
+local Registry = CreateFromMixins(CallbackRegistryMixin);
+Registry:OnLoad();
+Registry:GenerateCallbackEvents(GetKeysArray(Events));
 
 --------------
 
