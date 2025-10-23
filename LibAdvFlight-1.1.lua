@@ -103,7 +103,15 @@ function EventFrame:OnUpdate()
         Registry:TriggerEvent(Events.ADV_FLYING_STATE_CHANGED, State.AdvFlying);
     end
 
+    State.ForwardSpeed = forwardSpeed or 0;
+    local heading = GetPlayerFacing();
+    State.Heading = heading and heading * (180 / math.pi) or nil;
+
     local vigorChargeInfo = C_Spell.GetSpellCharges(SKYRIDING_SPELLS.SkywardAscent);
+    if not vigorChargeInfo then
+        return;
+    end
+
     if State.VigorCurrent ~= vigorChargeInfo.currentCharges then
         State.VigorCurrent = vigorChargeInfo.currentCharges;
         Registry:TriggerEvent(Events.VIGOR_CHANGED, State.VigorCurrent);
@@ -114,10 +122,6 @@ function EventFrame:OnUpdate()
         State.VigorMax = maxVigor;
         Registry:TriggerEvent(Events.VIGOR_MAX_CHANGED, State.VigorMax);
     end
-
-    State.ForwardSpeed = forwardSpeed or 0;
-    local heading = GetPlayerFacing();
-    State.Heading = heading and heading * (180 / math.pi) or nil;
 end
 
 EventFrame:SetScript("OnUpdate", EventFrame.OnUpdate);
