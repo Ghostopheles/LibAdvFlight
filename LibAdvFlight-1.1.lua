@@ -108,7 +108,7 @@ function EventFrame:OnUpdate()
     State.Heading = heading and heading * (180 / math.pi) or nil;
 
     local vigorChargeInfo = C_Spell.GetSpellCharges(SKYRIDING_SPELLS.SkywardAscent);
-    if not vigorChargeInfo then
+    if not vigorChargeInfo or issecretvalue(vigorChargeInfo.currentCharges) then
         return;
     end
 

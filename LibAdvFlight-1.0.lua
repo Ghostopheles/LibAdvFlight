@@ -122,6 +122,10 @@ function EventFrame:UNIT_POWER_UPDATE(unit, powerType)
     local vigorMax = UnitPowerMax("player", VIGOR_POWER_TYPE);
     local vigorCurrent = UnitPower("player", VIGOR_POWER_TYPE);
 
+    if issecretvalue and issecretvalue(vigorMax) then
+        return;
+    end
+
     -- vigor max
     if State.VigorMax ~= vigorMax then
         State.VigorMax = vigorMax;
