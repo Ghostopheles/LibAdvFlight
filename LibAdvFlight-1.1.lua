@@ -9,6 +9,8 @@ if not LibAdvFlight then
     return;
 end
 
+local issecretvalue = issecretvalue or function() return false; end;
+
 --- Event constants - for most cases, contains an 'on' and 'off' event, as well as a toggle event
 --- These can be registered using the API functions below, or by just registering a callback w/ the global EventRegistry
 ---@class LibAdvFlightEvents
