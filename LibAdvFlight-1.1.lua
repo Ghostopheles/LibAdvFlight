@@ -143,12 +143,6 @@ function LibAdvFlight.CanSwitchFlightStyles()
     return LibAdvFlight.HasTalentChoice(OPTIONAL_SPELLS.SwitchFlightStyle);
 end
 
---- Returns true if the player has chosen the lightning rush talent in the Skyriding skill tree
----@return boolean canSwitchFlightStyles
-function LibAdvFlight.HasLightningRush()
-    return LibAdvFlight.HasTalentChoice(OPTIONAL_SPELLS.LightningRush);
-end
-
 --- Returns true if the player has enabled the ability to carry friends with ride along
 ---@return boolean canSwitchFlightStyles
 function LibAdvFlight.HasRideAlongEnabled()
@@ -162,6 +156,12 @@ function LibAdvFlight.HasTalentChoice(choice)
 end
 
 local LIGHTNING_RUSH_AURA_SPELLID = 418590;
+
+--- Returns true if the player has chosen the lightning rush talent in the Skyriding skill tree
+---@return boolean canSwitchFlightStyles
+function LibAdvFlight.HasLightningRush()
+    return LibAdvFlight.HasTalentChoice(OPTIONAL_SPELLS.LightningRush);
+end
 
 ---@return number charges Number of lightning rush charges
 function LibAdvFlight.GetLightningRushCharges()
