@@ -13,5 +13,4 @@
 ## X-Curse-Project-ID: 970047
 ## X-Wago-ID: kNMdBjGz
 
-LibStub/LibStub.lua
 lib.xml
