@@ -114,6 +114,17 @@ function EventFrame:PLAYER_IS_GLIDING_CHANGED(isGliding)
     Registry:TriggerEvent(Events.ADV_FLYING_STATE_CHANGED, isGliding);
 end
 
+function EventFrame:PLAYER_ENTERING_WORLD()
+    local isGliding, canGlide, _ = C_PlayerInfo.GetGlidingInfo();
+    if isGliding ~= State.AdvFlying then
+        self:PLAYER_IS_GLIDING_CHANGED(isGliding);
+    end
+
+    if canGlide ~= State.AdvFlyEnabled then
+        self:PLAYER_CAN_GLIDE_CHANGED(canGlide);
+    end
+end
+
 function EventFrame:UNIT_FLAGS(unitToken)
     if UnitOnTaxi(unitToken) then
         if State.AdvFlyEnabled then
@@ -127,12 +138,13 @@ end
 
 ------
 
-local GLIDE_EVENTS = {
+local FRAME_EVENTS = {
     "PLAYER_CAN_GLIDE_CHANGED",
     "PLAYER_IS_GLIDING_CHANGED",
+    "PLAYER_ENTERING_WORLD"
 };
 
-FrameUtil.RegisterFrameForEvents(EventFrame, GLIDE_EVENTS);
+FrameUtil.RegisterFrameForEvents(EventFrame, FRAME_EVENTS);
 EventFrame:RegisterUnitEvent("UNIT_FLAGS", "player");
 
 EventFrame:SetScript("OnUpdate", EventFrame.OnUpdate);
