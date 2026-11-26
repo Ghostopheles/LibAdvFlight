@@ -1,3 +1,7 @@
+# v1.1.2
+- Bumped TOC
+- Implemented the heist of the century
+
 # v1.1.1
 - Bumped TOC
 - Added some performance optimizations to prevent wasteful state checking

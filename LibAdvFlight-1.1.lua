@@ -1,3 +1,4 @@
+--@curseforge-project-slug: libadvflight@
 assert(LibStub, "LibStub not found.");
 
 local major, minor = "LibAdvFlight-1.1", 2;
